@@ -1,0 +1,362 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.js'%}"></script>
+<style type="text/css">
+.cleanfloat::after{
+	display: block;
+	clear: both;
+	content:"";
+	visibility: hidden;
+	height: 0;
+}
+ul li{
+	list-style:none;
+	float:left;
+	font-size:25px;
+	margin-right:5px;
+	color:#ccc;
+	cursor:pointer;
+}
+.hs,.cs{
+	color:#0700FF;
+}
+
+.loginSubmit{
+	width: 160px;
+	height: 40px;
+	margin-left: 180px;
+	margin-top: 30px;
+	text-align: center;
+	border: 1px solid gray;
+	background-color: skyblue;
+}
+</style>
+<script>
+var score_array = new Array(10);
+var t_num = "{{score.t_num}}";
+var t_name = "{{score.t_name}}";
+var judges = "{{score.judges}}";
+var date = "{{score.date}}";
+var p_name = "{{score.p_name}}";
+var score_all = 0;
+var photo_list = "{{photo_list}}";
+var score_list = "{{score}}";
+var personnel_info = "{{personnel_info}}";
+
+$(function () {
+	$("ul li").hover(function(){
+		$(this).addClass('hs');
+		$(this).prevAll().addClass('hs');
+	},function(){
+		$(this).removeClass('hs');
+		$(this).prevAll().removeClass('hs');
+	})
+
+	$("ul li").click(function () {
+		$(this).addClass('cs');
+		$(this).prevAll().addClass('cs');
+		$(this).nextAll().removeClass('cs');
+		var score = $(this).attr('data-id');
+		var item = $(this).attr('data-name');
+		score_array.splice(item,item,score);
+	})
+})
+</script>
+<body>
+	<table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;">
+		<tr>
+			<td style="width: 16%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{score.t_num}}队
+		  </td>
+			<td style="width: 14%; padding: 0px; font-size: 13px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{photo_list.0.0}}
+		  </td>
+			<td style="width: 14%; padding: 0px; font-size: 13px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{photo_list.1.0}}
+		  </td>
+			<td style="width: 14%; padding: 0px; font-size: 13px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{photo_list.2.0}}
+		  </td>
+			<td style="width: 14%; padding: 0px; font-size: 13px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{photo_list.3.0}}
+		  </td>
+			<td style="width: 14%; padding: 0px; font-size: 13px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{photo_list.4.0}}
+		  </td>
+			<td style="width: 14%; padding: 0px; font-size: 13px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{photo_list.5.0}}
+		  </td>
+		</tr>
+		<tr id ="picture">
+			<td style="width: 16%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >{{score.t_name}}
+			</td>
+		</tr>
+	</table>
+	<table cellspacing="0" cellpadding="0" border="1" align="center" width="100%" style="max-width: 600px;" >
+		<!-- Line 1 -->
+		<tr>
+			<td rowspan="2" style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center"><b>感受</b><br>营造良好的演讲氛围
+			</td>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >PPT布局美观，设计恰当
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score0_1" data-id = "1" data-name = "0">&#9733;</li>
+					<li id = "score0_2" data-id = "2" data-name = "0">&#9733;</li>
+					<li id = "score0_3" data-id = "3" data-name = "0">&#9733;</li>
+					<li id = "score0_4" data-id = "4" data-name = "0">&#9733;</li>
+					<li id = "score0_5" data-id = "5" data-name = "0">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+		<!-- Line 2 -->
+		<tr>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >活跃气氛，引人入胜
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score1_1" data-id = "1" data-name = "1">&#9733;</li>
+					<li id = "score1_2" data-id = "2" data-name = "1">&#9733;</li>
+					<li id = "score1_3" data-id = "3" data-name = "1">&#9733;</li>
+					<li id = "score1_4" data-id = "4" data-name = "1">&#9733;</li>
+					<li id = "score1_5" data-id = "5" data-name = "1">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+		<!-- Line 3 -->
+		<tr>
+			<td rowspan="2" style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" ><b>流程</b><br>确保演讲顺畅及有节奏感
+			</td>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >熟悉内容，演讲流畅
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score2_1" data-id = "1" data-name = "2">&#9733;</li>
+					<li id = "score2_2" data-id = "2" data-name = "2">&#9733;</li>
+					<li id = "score2_3" data-id = "3" data-name = "2">&#9733;</li>
+					<li id = "score2_4" data-id = "4" data-name = "2">&#9733;</li>
+					<li id = "score2_5" data-id = "5" data-name = "2">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+		<!-- Line 4 -->
+		<tr>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >时间安排，控场节奏
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score3_1" data-id = "1" data-name = "3">&#9733;</li>
+					<li id = "score3_2" data-id = "2" data-name = "3">&#9733;</li>
+					<li id = "score3_3" data-id = "3" data-name = "3">&#9733;</li>
+					<li id = "score3_4" data-id = "4" data-name = "3">&#9733;</li>
+					<li id = "score3_5" data-id = "5" data-name = "3">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+		<!-- Line 5 -->
+		<tr>
+			<td rowspan="3" style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" ><b>内容</b><br>逻辑结构清晰且内容充实
+			</td>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >案例出彩，形式新颖
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score4_1" data-id = "1" data-name = "4">&#9733;</li>
+					<li id = "score4_2" data-id = "2" data-name = "4">&#9733;</li>
+					<li id = "score4_3" data-id = "3" data-name = "4">&#9733;</li>
+					<li id = "score4_4" data-id = "4" data-name = "4">&#9733;</li>
+					<li id = "score4_5" data-id = "5" data-name = "4">&#9733;</li>
+				</ul>
+			</td>
+		</tr>		
+		<!-- Line 6 -->
+		<tr>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >逻辑清晰，结构完整
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score5_1" data-id = "1" data-name = "5">&#9733;</li>
+					<li id = "score5_2" data-id = "2" data-name = "5">&#9733;</li>
+					<li id = "score5_3" data-id = "3" data-name = "5">&#9733;</li>
+					<li id = "score5_4" data-id = "4" data-name = "5">&#9733;</li>
+					<li id = "score5_5" data-id = "5" data-name = "5">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+		<!-- Line 7 -->
+		<tr>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >剖析深刻，合理归纳
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score6_1" data-id = "1" data-name = "6">&#9733;</li>
+					<li id = "score6_2" data-id = "2" data-name = "6">&#9733;</li>
+					<li id = "score6_3" data-id = "3" data-name = "6">&#9733;</li>
+					<li id = "score6_4" data-id = "4" data-name = "6">&#9733;</li>
+					<li id = "score6_5" data-id = "5" data-name = "6">&#9733;</li>
+				</ul>                                    
+			</td>
+		</tr>
+		<!-- Line 8 -->
+		<tr>
+			<td rowspan="3" style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" ><b>技巧</b><br>基础演讲技巧
+			</td>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >口齿清晰，表达准确
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score7_1" data-id = "1" data-name = "7">&#9733;</li>
+					<li id = "score7_2" data-id = "2" data-name = "7">&#9733;</li>
+					<li id = "score7_3" data-id = "3" data-name = "7">&#9733;</li>
+					<li id = "score7_4" data-id = "4" data-name = "7">&#9733;</li>
+					<li id = "score7_5" data-id = "5" data-name = "7">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+		<!-- Line 9 -->
+		<tr>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >目光交流，台风自然
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score8_1" data-id = "1" data-name = "8">&#9733;</li>
+					<li id = "score8_2" data-id = "2" data-name = "8">&#9733;</li>
+					<li id = "score8_3" data-id = "3" data-name = "8">&#9733;</li>
+					<li id = "score8_4" data-id = "4" data-name = "8">&#9733;</li>
+					<li id = "score8_5" data-id = "5" data-name = "8">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+		<!-- Line 10 -->
+		<tr>
+			<td style="width: 33%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center" >表现力强，应变力强
+			</td>
+			<td>
+				<ul class="cleanfloat">
+					<li id = "score9_1" data-id = "1" data-name = "9">&#9733;</li>
+					<li id = "score9_2" data-id = "2" data-name = "9">&#9733;</li>
+					<li id = "score9_3" data-id = "3" data-name = "9">&#9733;</li>
+					<li id = "score9_4" data-id = "4" data-name = "9">&#9733;</li>
+					<li id = "score9_5" data-id = "5" data-name = "9">&#9733;</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 500px;">
+		<tr>
+			<td width = "30%" valign="top">
+				<table>
+					<tr>
+						<td style=" padding-top: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center;" align="top">个人信息
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<!--<img src="images/Image_200x200.png" width="84" height="84" />-->
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td width = "70%">
+				<table width = "100%" id = "base_info" border="1" cellspacing="0">
+				</table>
+				<table border="1" cellspacing="0" width = "100%">
+					<td style="width: 30%; height: 100px;padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: left; line-height: 100px">轮岗履历
+					</td>
+				</table>
+				<table border="1" cellspacing="0" width = "100%">
+					<td style="width: 30%; height: 100px;padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: left; line-height: 100px">自己一年的亮点
+					</td>
+				</table>
+				<table border="0" width = "100%">
+					<td style="width: 30%; height: 100px;padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: left; line-height: 100px">点亮关注他，每组只能关注一位学员
+					</td>
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+	<table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 500px;">
+		<button id="loginSubmit" value="提交" class="loginSubmit" onclick="submit()"/>
+	</table>
+</body>
+<script>
+var tr=document.getElementById("picture");
+
+{% for photo in photo_list %}
+ 	var img = document.createElement("img");
+	var td = document.createElement("td");
+	td.appendChild(img);
+ 	tr.appendChild(td);
+
+ 	var imageData = "{{photo.1}}".substring(7);
+ 	imageData = imageData.substring(0, imageData.length-6);
+
+ 	img.src = "data:image/jpg;base64," + imageData;
+	img.style.width = "84px";
+	img.style.height = "84px";
+ 	td.onclick = function(){
+		p_name = "{{photo.0}}";
+		var temp = document.createElement("form");
+		temp.action = '/app/follow/';
+		temp.method = "post";
+		var opt = document.createElement("textarea");
+		opt.name = 'name';
+		var photo = "{{photo.0}}";
+		opt.value = photo;
+		temp.appendChild(opt);
+		document.body.appendChild(temp);
+		temp.submit();
+		document.body.removeChild(temp);
+		return temp;
+	};
+{% endfor %}
+
+
+score_array.splice(0,0,{{score.score_1}});
+score_array.splice(1,1,{{score.score_2}});
+score_array.splice(2,2,{{score.score_3}});
+score_array.splice(3,3,{{score.score_4}});
+score_array.splice(4,4,{{score.score_5}});
+score_array.splice(5,5,{{score.score_6}});
+score_array.splice(6,6,{{score.score_7}});
+score_array.splice(7,7,{{score.score_8}});
+score_array.splice(8,8,{{score.score_9}});
+score_array.splice(9,9,{{score.score_10}});
+
+function submit(){
+	var temp = document.createElement("form");
+	temp.action = '/app/statistics/';
+	temp.method = "post";
+	var opt = document.createElement("textarea");
+	opt.name = 't_num';
+	opt.value = t_num;
+	temp.appendChild(opt);
+	opt.name = 't_name';
+	opt.value = t_name;
+	temp.appendChild(opt);
+	opt.name = 'judges';
+	opt.value = judges;
+	temp.appendChild(opt);
+	opt.name = 'date';
+	opt.value = date;
+	temp.appendChild(opt);
+	opt.name = 'p_name';
+	opt.value = p_name;
+	temp.appendChild(opt);
+	opt.name = 'p_name';
+	opt.value = p_name;
+	temp.appendChild(opt);
+	
+	for (var i= 0; i < score_array.length; i++) {
+		opt.name = 'score_' + i;
+		opt.value = score_array[i];
+		temp.appendChild(opt);
+		score_all += score_array[i];
+	}
+	opt.score_all = 'score_all';
+	opt.value = score_all;
+	document.body.appendChild(temp);
+	temp.submit();
+	document.body.removeChild(temp);
+	return temp;	
+}
+</script>
+</html>

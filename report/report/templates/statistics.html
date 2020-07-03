@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<style type="text/css">
+#export{
+	width: 100%;
+	max-width: 600px;
+	margin: auto;
+	text-align:right;
+}
+</style>
+<body>
+	<div id="export">
+		<form action="/app/excel/" method = "post">
+			<button >导出EXCEL</button>
+		</form>
+	</div>
+	<table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;" id ="score_list">
+		<tr>
+			<td style="width: 15%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">组
+			</td>
+			<td style="width: 15%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">组名
+			</td>
+			<td style="width: 15%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">评委
+			</td>
+			<td style="width: 15%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">创建时间
+			</td>
+			<td style="width: 15%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">关注成员
+			</td>
+			<td style="width: 15%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">总分
+			</td>
+			<td style="width: 15%; padding: 0px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">操作
+			</td>
+		</tr>
+	</table>
+<script>
+var score_array[0,0,0,0,0,0,0,0,0,0];
+var t_num = {{score.t_num}};
+var t_name = {{score.t_name}};
+var judges = {{score.judges}};
+var date = {{score.date}};
+var p_name = {{score.p_name}};
+var score_all = 0;
+var score_list = "{{score_list}}";
+{% for score in score_list %}
+	var tr=document.createElement("tr");
+	table.appendChild(tr);
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= {{score.0}};
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= {{score.1}};
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= {{score.2}};
+{{score.1}}
+{{score.2}}
+{{score.3}}
+{{score.4}}
+{{score.5}}
+{{score.6}}
+{{score.7}}
+{{score.8}}
+{{score.9}}
+{{score.10}}
+{{score.11}}	
+{% endfor %}
+
+const a = document.createElement('a');
+// 利用URL.createObjectURL()方法为a元素生成blob URL
+a.href = URL.createObjectURL({{excel}})  // 创建对象超链接
+a.download = 'demo.xlsx';
+a.click();	
+
+//假数据
+var datas=[{
+	group:1,
+	group_name:"西游记队",
+	judeg:"唐僧",
+	creattime:20200626,
+	member:"孙悟空",
+	score:100,
+},{
+	group:1,
+	group_name:"西游记队",
+	judeg:"唐僧",
+	creattime:20200626,
+	member:"猪八戒",
+	score:80,
+},{
+	group:1,
+	group_name:"西游记队",
+	judeg:"唐僧",
+	creattime:20200626,
+	member:"沙和尚",
+	score:70,
+},{
+	group:2,
+	group_name:"三国演义队",
+	judeg:"罗贯中",
+	creattime:20200628,
+	member:"赵云",
+	score:90,
+},{
+	group:2,
+	group_name:"三国演义队",
+	judeg:"罗贯中",
+	creattime:20200628,
+	member:"马岱",
+	score:70,
+},{
+	group:2,
+	group_name:"三国演义队",
+	judeg:"罗贯中",
+	creattime:20200628,
+	member:"曹操",
+	score:85,
+},{
+	group:2,
+	group_name:"三国演义队",
+	judeg:"罗贯中",
+	creattime:20200628,
+	member:"郭嘉",
+	score:55,
+}];
+	
+var table=document.getElementById("score_list");
+for(var i=0;i<datas.length;i++)
+{
+	var tr=document.createElement("tr");
+	table.appendChild(tr);
+	for(var k in datas[i]){
+		var td=document.createElement("td");
+		tr.appendChild(td);
+		td.style.textAlign ="center";
+		td.innerHTML= datas[i][k];
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>应届生期满汇报</title>
+<style type="text/css">
+html, body {
+	margin: 0 !important;
+	padding: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+	font-family: "微软雅黑";
+}
+
+
+table, td {
+	mso-table-lspace: 0pt !important;
+	mso-table-rspace: 0pt !important;
+}
+
+table {
+	border-spacing: 0 !important;
+	border-collapse: collapse !important;
+	table-layout: fixed !important;
+	margin: 0 auto !important;
+}
+
+#main_section
+{
+height:10%;
+width:100%;
+overflow: hidden;
+float:left;
+}
+	
+#group_section
+{
+height:10%;
+width:100%;
+overflow: hidden;
+float:left;
+}
+
+</style>
+<style type="text/css">
+*{
+	margin: 0px;
+	padding: 0px;
+}
+/* 弹出登陆框按钮 */
+#login-header{
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+}
+#login-header a{
+	font-size: 24px;
+	text-decoration: none;
+	color: black;
+}
+
+/* 登陆框主体 */
+.login{
+	position: absolute;
+	width: 512px;
+	height: 204px;
+	z-index: 9999;
+	display: none;
+	background-color: white;
+	/* 这里要注意绝对定位的盒子怎么在屏幕显示居中 */
+	left: 50%;
+	margin-left: -256px;
+	margin-top: 142px;
+	border: 1px solid gray;
+}
+/* 登陆框标题 */
+.login-title{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	margin-bottom: 20px;
+	cursor: move;
+}
+.login-title span a{
+	text-decoration: none;
+	border: 0;
+	font-size: 22px;
+	color: skyblue;
+	border-radius: 0px;
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+
+/* 登陆表单 */
+.login-input{
+	margin: 20px 0px 30px 0px;
+}
+.login-input label{
+	float: left;
+	height: 35px;
+	line-height: 35px;
+	width: 90px;
+	padding-left: 10px;
+	text-align: right;
+	font-size: 14px;
+}
+.login-input input.list-input{
+	height: 35px;
+	line-height: 35px;
+	width: 350px;
+	text-indent: 5px;
+}
+/* 登陆框登陆按钮 */
+.loginSubmit{
+	width: 160px;
+	height: 40px;
+	margin-left: 190px;
+	margin-top: 30px;
+	text-align: center;
+	border: 1px solid gray;
+	background-color: #7DCDF4;
+}
+
+/* 遮盖层 */
+.bg{
+	background-color: #000;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	position: fixed;
+	opacity: 0.3;
+	-webkit-opacity: 0.3;
+	-moz-opacity: 0.3;
+	display: none;
+}
+</style>
+<script type="text/javascript" language="javascript">
+function disp_prompt(id)
+{
+	var login=document.getElementById('login');
+	var bg=document.getElementById('bg');
+	// 1.点击"点击，弹出登陆框",弹出登陆窗口和遮盖层
+	var judges=document.getElementById('judges');
+	judges.onclick=function(){
+		login.style.display="block";
+		bg.style.display="block";
+		return false;
+	}
+	// 2.点击"关闭",隐藏登陆窗口和遮盖层
+	var closeBtn=document.getElementById('closeBtn');
+	closeBtn.onclick=function(){
+		login.style.display="none";
+		bg.style.display="none";
+		return false;
+	}
+}
+</script>
+</head>
+<body width="100%" height="100%" style="margin: 0;">
+<!-- 登陆框主体 -->
+<div id="login" class="login">
+<!-- 登陆框标题 -->
+<div id="login-title" class="login-title">
+	<span><a id="closeBtn" href="javascript:void(0)">×</a></span>
+	<div align="left" style="margin: 5px">
+		<label>录入评委姓名：</label>
+	</div>
+</div>
+<!-- 登陆框表单 -->
+<div id="login-form">
+	<div class="login-input">
+		<label></label>
+		<form action="/app/setJudges/" method="post">
+		{% csrf_token %}
+		<!--<form action="/setJudges" method="post">-->
+			<input type="text" placeholder="请输入评委名" class="list-input" name="Judges"/>
+			<input type="submit"  id="loginSubmit" value="确定" class="loginSubmit"/>
+		</form>
+	</div>
+</div>
+</div>
+
+<!-- 遮盖层 -->
+<div id="bg" class="bg">sada</div>
+{% load static %}
+<div id="head_logo" style="width: 100%; height: 50px;background:rgba(ff,ff,ff,1.00); margin-left: 180px">
+	<div id="head_left" style="width: 20%; float: left;">
+		<img src="{% static 'img/logo.png'%}" style="width: 50px; height: 50px"/>
+	</div>
+	<div id="head_right" style="width: 80%; float: right;">
+		<label style="padding: 5px; width: 100%; font-size: 30px; color: #000000;" >应届生期满汇报</label>
+	</div>
+</div>
+<div id="head" style="width: 100%; height: 5px;background:rgba(00,54,112,1.00)">
+</div>
+<table>
+  <tr>
+    <td align="center" style="width: 100%;">
+		<center>
+			<div id= "main_section"> 
+			  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+				<tr>
+				  <td style="width: 50%; padding: 20px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #0082CA; text-align: center" >2019届
+					</td>
+				  <td id="judges" style="width: 50%; padding: 20px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #0082CA; text-align: center" onClick="disp_prompt(this)">评委：{{Judges}} 
+					</td>
+				</tr>
+			  </table>
+			</div> 
+			<div id= "group_section" > 
+				<table cellspacing="0" cellpadding="0" border="1" align ="center" height="700" width="70%" style="color: #595757; text-align: center;" id = "group">
+				</table>
+			</div>
+      </center>
+</td>
+</tr>
+</table>
+<script>
+var team_list = "{{ team_list }}";
+var Judges = "{{Judges}}";
+var table=document.getElementById("group");
+	
+{% for item in team_list %}
+	var tr=document.createElement("tr");
+ 	table.appendChild(tr);
+ 	var td=document.createElement("td");
+ 	td.width = "30%";
+ 	td.innerHTML = {{item.1}};
+	tr.appendChild(td);
+	var td=document.createElement("td");
+	td.width = "70%";
+ 	td.innerHTML = "{{item.0}}";
+	td.innerHTML += "<br>";
+ 	{% for i in item.3 %}
+		td.innerHTML += "{{i}} ";
+	{% endfor %}
+	tr.appendChild(td);
+	td.onclick = function(){
+		var temp = document.createElement("form");
+		temp.action = '/app/scoring/';
+		temp.method = "post";
+		var opt = document.createElement("textarea");
+		opt.name = 'team';
+		var team = "{{item.0}}";
+		opt.value = team;
+		temp.appendChild(opt);
+		document.body.appendChild(temp);
+		temp.submit();
+		document.body.removeChild(temp);
+		return temp;
+	};
+{% endfor %}
+</script>
+</body>
+</html>

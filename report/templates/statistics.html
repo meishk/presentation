@@ -1,0 +1,253 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<style type="text/css">
+html, body {
+	margin: 0 !important;
+	padding: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+	font-family: "微软雅黑";
+}
+body{
+	{% load static %}
+	background : url({% static 'img/bg.jpg'%});
+	background-size: cover;
+}
+td {
+	padding: 0px;
+	color:#595757;
+	text-align: center;
+}
+#export{
+	width: 100%;
+	max-width: 600px;
+	margin: auto;
+	text-align:right;
+}
+/* 登陆框主体 */
+.login{
+	position: absolute;
+	width: 512px;
+	height: 204px;
+	z-index: 9999;
+	display: none;
+	background-color: white;
+	/* 这里要注意绝对定位的盒子怎么在屏幕显示居中 */
+	left: 50%;
+	margin-left: -256px;
+	margin-top: 142px;
+	border: 1px solid gray;
+}
+/* 登陆框标题 */
+.login-title{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	margin-bottom: 20px;
+	cursor: move;
+}
+.login-title span a{
+	text-decoration: none;
+	border: 0;
+	font-size: 22px;
+	color: skyblue;
+	border-radius: 0px;
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+
+/* 登陆表单 */
+.login-input{
+	margin: 20px 0px 30px 0px;
+}
+.login-input label{
+	float: left;
+	height: 35px;
+	line-height: 35px;
+	width: 90px;
+	padding-left: 10px;
+	text-align: right;
+	font-size: 14px;
+}
+.login-input input.list-input{
+	height: 35px;
+	line-height: 35px;
+	width: 350px;
+	text-indent: 5px;
+}
+/* 登陆框登陆按钮 */
+.loginSubmit{
+	width: 160px;
+	height: 40px;
+	margin-left: 190px;
+	margin-top: 30px;
+	text-align: center;
+	border: 1px solid gray;
+	background-color: skyblue;
+}
+
+/* 遮盖层 */
+.bg{
+	background-color: #000;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	position: fixed;
+	opacity: 0.3;
+	-webkit-opacity: 0.3;
+	-moz-opacity: 0.3;
+	display: none;
+}
+</style>
+<body>
+{% load static %}
+<div id="head_logo" style="width: 100%; height: 50px;background:rgba(ff,ff,ff,1.00); margin-left: 180px">
+	<div id="head_left" style="width: 20%; float: left;">
+		<img src="{% static 'img/logo.png'%}" style="width: 50px; height: 50px"/>
+	</div>
+	<div id="head_right" style="width: 80%; float: right;">
+		<label style="width: 100%; font-size: 30px; color: #000000;" >应届生期满汇报</label>
+	</div>
+</div>
+<div id="head" style="width: 100%; height: 5px;background:rgba(00,54,112,1.00)">
+</div>
+<!-- 登陆框主体 -->
+<div id="login" class="login">
+<!-- 登陆框标题 -->
+<div id="login-title" class="login-title">
+	<span><a id="closeBtn" href="javascript:void(0)">×</a></span>
+	<div align="left">
+		<label>修改总分：</label>
+	</div>
+</div>
+<!-- 登陆框表单 -->
+<div id="login-form">
+	<div class="login-input">
+		<label></label>
+		<!--<form action="/setJudges" method="post">-->
+			<input type="text" placeholder="请输入总分" class="list-input" name="score_all" id="score_all"/>
+			<input type="submit"  id="loginSubmit" value="确定" class="loginSubmit" onclick="confirm(this)"/>
+	</div>
+</div>
+</div>
+
+<!-- 遮盖层 -->
+<div id="bg" class="bg">sada</div>
+	<div id="export" style="max-width: 800px;">
+		<form action="/app/excel/" method = "post">
+			<input id="execute" value="导出EXCEL" class="loginSubmit" onclick="submit()" style = "margin: 20px"/>
+		</form>
+	</div>
+	<table cellspacing="0" cellpadding="0" border="1" align="center" width="100%" style="max-width: 800px;" id ="score_table">
+		<tr>
+			<td style="width: 15%; padding: 10px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">组
+			</td>
+			<td style="width: 15%; padding: 10px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">组名
+			</td>
+			<td style="width: 15%; padding: 10px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">评委
+			</td>
+			<td style="width: 15%; padding: 10px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">创建时间
+			</td>
+			<td style="width: 15%; padding: 10px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">关注成员
+			</td>
+			<td style="width: 15%; padding: 10px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">总分
+			</td>
+			<td style="width: 15%; padding: 10px; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: center">操作
+			</td>
+		</tr>
+	</table>
+<script>
+
+var t_num = "{{score.t_num}}";
+var t_name = "{{score.t_name}}";
+var judges = "{{score.judges}}";
+var date = "{{score.date}}";
+var p_name = "{{score.p_name}}";
+var score_all = "{{score.score_all}}";
+var score_list = "{{score_list}}";
+var table = document.getElementById("score_table");
+var count = 0;
+{% for score in score_list %}
+	var tr=document.createElement("tr");
+	table.appendChild(tr);
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= "{{score.t_num}}";
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= "{{score.t_name}}";
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= "{{score.judges}}";
+ 	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= "{{score.date}}";
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= "{{score.p_name}}";
+	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= "{{score.score_all}}";
+ 	var td=document.createElement("td");
+	tr.appendChild(td);
+	td.style.textAlign ="center";
+	td.innerHTML= "操作";
+ 	td.onclick = function(){
+		var login=document.getElementById('login');
+		var bg=document.getElementById('bg');
+		var submit=document.getElementById('loginSubmit');
+		// 1.点击"点击，弹出登陆框",弹出登陆窗口和遮盖层
+		submit.id = count;
+		login.style.display="block";
+		bg.style.display="block";
+		
+		// 2.点击"关闭",隐藏登陆窗口和遮盖层
+		var closeBtn=document.getElementById('closeBtn');
+		closeBtn.onclick=function(){
+			login.style.display="none";
+			bg.style.display="none";
+			return false;
+		}
+	};
+	count++;
+{% endfor %}
+
+function confirm(id){
+	var num = id.id;
+	var score=document.getElementById('score_all');
+	var temp = document.createElement("form");
+	temp.action = '/app/update/';
+	temp.method = "post";
+	var opt = document.createElement("textarea");
+	opt.name = 'score_all';
+	opt.value = score.value.numberValue;
+	temp.appendChild(opt);
+	var opt = document.createElement("textarea");
+	opt.name = 'Judges';
+	opt.value = id.judges;
+	temp.appendChild(opt);
+ 	var opt = document.createElement("textarea");
+	opt.name = 'team';
+	opt.value = id.t_name;
+	temp.appendChild(opt);
+	document.body.appendChild(temp);
+	temp.submit();
+	document.body.removeChild(temp);
+	return temp;
+};
+</script>
+</body>
+</html>
